@@ -15,6 +15,7 @@ driver = webdriver.Firefox(service=service, options=options)
 
 driver.get("https://libbyapp.com/search/nh")
 
+def get_book_info(soup):
 
 
 try:
@@ -22,6 +23,7 @@ try:
     search_input.click()
     search_input.send_keys("Little Women")
     search_input.send_keys(Keys.RETURN)
+    
 except Exception as e:
     print("Search bar not found", e)
     driver.quit()
