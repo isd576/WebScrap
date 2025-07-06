@@ -1,5 +1,6 @@
 import warnings
 
+from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.firefox.service import Service
@@ -15,14 +16,13 @@ driver = webdriver.Firefox(service=service, options=options)
 
 driver.get("https://libbyapp.com/search/nh")
 
-def get_book_info(soup):
-
-
 try:
     search_input = WebDriverWait(driver, 15). until(EC.presence_of_element_located((By.CSS_SELECTOR, "input[type=search]")))
     search_input.click()
     search_input.send_keys("Little Women")
     search_input.send_keys(Keys.RETURN)
+
+    html = BeautifulSoup(driver.page_source)
     
 except Exception as e:
     print("Search bar not found", e)
