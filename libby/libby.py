@@ -17,13 +17,16 @@ driver = webdriver.Firefox(service=service, options=options)
 driver.get("https://libbyapp.com/search/nh")
 
 try:
+    html = BeautifulSoup(driver.page_source)
+    #searhing for the book - selenium
     search_input = WebDriverWait(driver, 15). until(EC.presence_of_element_located((By.CSS_SELECTOR, "input[type=search]")))
     search_input.click()
     search_input.send_keys("Little Women")
     search_input.send_keys(Keys.RETURN)
-
-    html = BeautifulSoup(driver.page_source)
+    curl = driver.current_url
     
+    #soup time
+
 except Exception as e:
     print("Search bar not found", e)
     driver.quit()
